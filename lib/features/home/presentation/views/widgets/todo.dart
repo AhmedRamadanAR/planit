@@ -19,7 +19,7 @@ class ToDoTile extends StatelessWidget {
 
       child: Container(
         decoration: BoxDecoration(
-            color: const Color(0xFF979797),
+            color: Colors.white,
             borderRadius: BorderRadius.circular(12)),
         child: Row(
           children: [
@@ -29,7 +29,7 @@ class ToDoTile extends StatelessWidget {
             ),
             Text(
               taskName,
-              style: TextStyle(decoration: isChecked? TextDecoration.lineThrough : TextDecoration.none),
+              style: TextStyle(decoration: isChecked? TextDecoration.lineThrough : TextDecoration.none,color: darkGray),
             )
           ],
         ),

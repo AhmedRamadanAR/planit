@@ -32,44 +32,46 @@ class HomeScreen extends StatelessWidget {
         },
         child: Icon(Icons.add),
       ),
-      body: Column(
-        children: [
-          DayListView(
-            onDaySelected: (day) {
-              context.read<SelectedDayCubit>().selectDay(day);
-            },
-          ),
-          Expanded(
-            child: BlocBuilder<TaskCubit, Map<String, List<TaskModel>>>(
-              builder: (context, tasks) {
-                final selectedDay = context.watch<SelectedDayCubit>().state;
-
-                if (selectedDay == null) {
-                  return Center(child: Text('Please select a day.'));
-                }
-
-                final dayTasks = tasks[selectedDay] ?? [];
-
-                return ListView.builder(
-                  itemCount: dayTasks.length,
-                  itemBuilder: (context, index) {
-                    final task = dayTasks[index];
-                    return ToDoTile(
-                      key: ValueKey(task.key),
-                      taskName: task.title,
-                      isChecked: task.isCompleted,
-                      onChanged: (_) {
-                        if (selectedDay != null) {
-                          TaskCubit.get(context).updateTask(selectedDay, index);
-                        }
-                      },
-                    );
-                  },
-                );
+      body: SafeArea(
+        child: Column(
+          children: [
+            DayListView(
+              onDaySelected: (day) {
+                context.read<SelectedDayCubit>().selectDay(day);
               },
             ),
-          ),
-        ],
+            Expanded(
+              child: BlocBuilder<TaskCubit, Map<String, List<TaskModel>>>(
+                builder: (context, tasks) {
+                  final selectedDay = context.watch<SelectedDayCubit>().state;
+        
+                  if (selectedDay == null) {
+                    return Center(child: Text('Please select a day.'));
+                  }
+        
+                  final dayTasks = tasks[selectedDay] ?? [];
+        
+                  return ListView.builder(
+                    itemCount: dayTasks.length,
+                    itemBuilder: (context, index) {
+                      final task = dayTasks[index];
+                      return ToDoTile(
+                        key: ValueKey(task.key),
+                        taskName: task.title,
+                        isChecked: task.isCompleted,
+                        onChanged: (_) {
+                          if (selectedDay != null) {
+                            TaskCubit.get(context).updateTask(selectedDay, index);
+                          }
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

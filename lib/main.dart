@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:planit/features/home/data/models/task_model/task_model.dart';
 import 'package:planit/features/home/presentation/view_models/selected_day_cubit.dart';
@@ -10,9 +11,10 @@ import 'package:planit/features/home/presentation/views/home_screen.dart';
 import 'features/home/presentation/view_models/home_cubit.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+ WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  Hive.registerAdapter(TaskModelAdapter());
+
+ Hive.registerAdapter(TaskModelAdapter());
   final taskBox = await Hive.openBox<TaskModel>('tasks');
   var settingsBox = await Hive.openBox<String>('settingsBox');
 

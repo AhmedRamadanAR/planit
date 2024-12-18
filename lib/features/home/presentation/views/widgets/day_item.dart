@@ -20,7 +20,7 @@ class DayItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(13),
       decoration: BoxDecoration(
         color: isSelected ? Colors.blue : cyanColor,
         borderRadius: BorderRadius.circular(30),

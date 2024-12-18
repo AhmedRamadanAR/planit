@@ -30,29 +30,38 @@ class DayListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width; // Get screen width
+
     final daysWithDates = getNext7DaysStartingMonday();
     return BlocBuilder<SelectedDayCubit, String?>(
       builder: (context, selectedDay) {
         return Padding(
-          padding: const EdgeInsets.all(30),
-          child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+          padding: const EdgeInsets.all(20),
+          child: SizedBox(
             height: 80,
-            child: ListView.builder(
+            child: ListView.builder(shrinkWrap: true
+              ,
               scrollDirection: Axis.horizontal,
               itemCount: daysWithDates.length,
               itemBuilder: (context, index) {
                 String dayName = daysWithDates.keys.elementAt(index);
                 String dayNumber = daysWithDates[dayName]!;
 
-                return GestureDetector(
-                  onTap: () {
-                    BlocProvider.of<SelectedDayCubit>(context).selectDay(dayName);
-                    onDaySelected(dayName);
-                  },
-                  child: DayItem(
-                    dayName: dayName,
-                    dayNumber: dayNumber,
-                    isSelected: dayName == selectedDay,
+                return Padding(
+                  padding: EdgeInsets.only(
+                    right: index == daysWithDates.length - 1
+                    ? screenWidth * 0.05 // Add extra padding for the last item
+                        : 10.0,),
+                  child: GestureDetector(
+                    onTap: () {
+                      BlocProvider.of<SelectedDayCubit>(context).selectDay(dayName);
+                      onDaySelected(dayName);
+                    },
+                    child: DayItem(
+                      dayName: dayName,
+                      dayNumber: dayNumber,
+                      isSelected: dayName == selectedDay,
+                    ),
                   ),
                 );
               },

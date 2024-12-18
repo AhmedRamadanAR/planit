@@ -30,7 +30,7 @@ class ToDoTile extends StatelessWidget {
             ),
             Text(
               taskName,
-              style:Styles.textStyle18.copyWith(decoration: isChecked? TextDecoration.lineThrough : TextDecoration.none,color: darkGray)
+              style:Styles.textStyle18.copyWith(decoration: isChecked? TextDecoration.lineThrough : TextDecoration.none,color: darkGray,fontSize:16)
             )
           ],
         ),

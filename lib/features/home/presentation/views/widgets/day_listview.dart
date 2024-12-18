@@ -30,7 +30,7 @@ class DayListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width; // Get screen width
+    final screenWidth = MediaQuery.of(context).size.width;
 
     final daysWithDates = getNext7DaysStartingMonday();
     return BlocBuilder<SelectedDayCubit, String?>(
@@ -50,7 +50,7 @@ class DayListView extends StatelessWidget {
                 return Padding(
                   padding: EdgeInsets.only(
                     right: index == daysWithDates.length - 1
-                    ? screenWidth * 0.05 // Add extra padding for the last item
+                    ? screenWidth * 0.05
                         : 10.0,),
                   child: GestureDetector(
                     onTap: () {

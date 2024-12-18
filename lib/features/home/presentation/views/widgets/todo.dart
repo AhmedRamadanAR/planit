@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:planit/constants.dart';
+import 'package:planit/core/utilis/style.dart';
 
 class ToDoTile extends StatelessWidget {
   final String taskName;
@@ -29,7 +30,7 @@ class ToDoTile extends StatelessWidget {
             ),
             Text(
               taskName,
-              style: TextStyle(decoration: isChecked? TextDecoration.lineThrough : TextDecoration.none,color: darkGray),
+              style:Styles.textStyle18.copyWith(decoration: isChecked? TextDecoration.lineThrough : TextDecoration.none,color: darkGray)
             )
           ],
         ),
